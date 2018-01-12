@@ -106,7 +106,7 @@ resources:
               members:
                 -
                   type: interface
-                  name: nic2
+                  name: ens20f1
                   # force the MAC address of the bridge to this interface
                   primary: true
                 -
@@ -133,16 +133,6 @@ resources:
                   addresses:
                     -
                       ip_netmask: {get_param: StorageIpSubnet}
-            -
-              type: ovs_bridge
-              name: br-ex
-              use_dhcp: false
-              dns_servers: {get_param: DnsServers}
-              members:
-                -
-                  type: interface
-                  name: nic3
-                  # force the MAC address of the bridge to this interface
                 -
                   type: vlan
                   vlan_id: {get_param: ExternalNetworkVlanID}
@@ -160,15 +150,15 @@ resources:
               members:
                 -
                   type: interface
-                  name: nic4
-            # -
-            #   type: ovs_bridge
-            #   name: br-sriov2
-            #   use_dhcp: false
-            #   members:
-            #     -
-            #       type: interface
-            #       name: nic5
+                  name: ens10f0
+            -
+              type: ovs_bridge
+              name: br-sriov2
+              use_dhcp: false
+              members:
+                -
+                  type: interface
+                  name: ens10f1
 
 outputs:
   OS::stack_id:

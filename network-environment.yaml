@@ -42,10 +42,10 @@ parameter_defaults:
   NeutronNetworkType: 'vlan'
   # The OVS logical->physical bridge mappings to use.
   # NeutronBridgeMappings: 'datacentre:br-ex,sriov1:br-sriov1,sriov2:br-sriov2'
-  NeutronBridgeMappings: 'datacentre:br-ex,sriov1:br-sriov1'
+  NeutronBridgeMappings: 'datacentre:br-ex,sriov1:br-sriov1,sriov2:br-sriov2'
   # The Neutron ML2 and OpenVSwitch vlan mapping range to support.
   # NeutronNetworkVLANRanges: 'datacentre:22:22,sriov1:25:25,sriov2:26:26'
-  NeutronNetworkVLANRanges: 'datacentre:22:22,sriov1:25:25'
+  NeutronNetworkVLANRanges: 'datacentre:22:22,sriov1:25:25,sriov2:26:26'
   # Nova flavor to use.
   OvercloudControlFlavor: control
   OvercloudComputeFlavor: compute
@@ -84,20 +84,22 @@ parameter_defaults:
   #   - devname: "p6p2"
   #     physical_network: "sriov2"
   NovaPCIPassthrough:
-    - devname: "ens10f1"
+    - devname: "ens10f0"
       physical_network: "sriov1"
+    - devname: "ens10f1"
+      physical_network: "sriov2"
   # List of supported pci vendor devices in the format VendorID:ProductID.
   # NeutronSupportedPCIVendorDevs: ['8086:154d', '8086:10ed']
   # List of <physical_network>:<physical device>
   # All physical networks listed in network_vlan_ranges on the server
   # should have mappings to appropriate interfaces on each agent.
   # NeutronPhysicalDevMappings: "sriov1:p6p1,sriov2:p6p2"
-  NeutronPhysicalDevMappings: "sriov1:ens10f1"
+  NeutronPhysicalDevMappings: "sriov1:ens10f0,sriov2:ens10f1"
   # Provide the list of VFs to be reserved for each SR-IOV interface.
   # Format "<interface_name1>:<numvfs1>","<interface_name2>:<numvfs2>"
   # Example "eth1:4096","eth2:128"
   # Currently, the Red Hat OpenStack Platform with NFV supports 30 or fewer VFs. 
-  NeutronSriovNumVFs: "ens10f1:30"
+  NeutronSriovNumVFs: "ens10f0:30,ens10f1:30"
 
   # Reserved RAM for host processes
   NovaReservedHostMemory: 2048
