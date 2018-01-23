@@ -2,6 +2,7 @@ resource_registry:
   # Specify the relative/absolute path to the config files you want to use for override the default.
   OS::TripleO::Compute::Net::SoftwareConfig: nic-configs/compute.yaml
   OS::TripleO::Controller::Net::SoftwareConfig: nic-configs/controller.yaml
+  OS::TripleO::CephStorage::Net::SoftwareConfig: nic-configs/ceph-storage.yaml
   # First boot and Kernel Args
   OS::TripleO::NodeUserData: first-boot.yaml
   OS::TripleO::NodeExtraConfigPost: post-install.yaml
@@ -49,9 +50,11 @@ parameter_defaults:
   # Nova flavor to use.
   OvercloudControlFlavor: control
   OvercloudComputeFlavor: compute
+  OvercloudCephStorageFlavor: ceph-storage
   # Number of nodes to deploy.
   ControllerCount: 1
   ComputeCount: 2
+  CephStorageCount: 1
   # NTP server configuration.
   # NtpServer: clock.redhat.com
   NtpServer: time.stdtime.gov.tw
